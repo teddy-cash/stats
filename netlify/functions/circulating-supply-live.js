@@ -40,29 +40,30 @@ const TREASURY = "0x7B4a14CD122BFE2e717c27914a024D05eC3061B9"
 
 
 exports.handler = async function(event, context) {
-  const spRewardsTotal = await communityIssuance.LQTYSupplyCap();
   const spRewardsIssued = await communityIssuance.totalLQTYIssued();  
 
+  // AVAX/TSD pool2
   const tsdPoolRewardsTotal = ethers.BigNumber.from("3000000000000000000000000");
   const tsdPoolRemaining = await teddyToken.balanceOf(tsdPoolRewards.address)
   const tsdPoolRewardsIssued = tsdPoolRewardsTotal.sub(tsdPoolRemaining);
 
-  const teddyPoolRewardsTotal = ethers.BigNumber.from("1000000000000000000000000");
+  // AVAX/TEDDY pool2
   const teddyPoolRemaining = await teddyToken.balanceOf(teddyPoolReward.address)
-  const teddyPoolRewardsIssued = teddyPoolRewardsTotal.sub(teddyPoolRemaining);
-
+  
+  // Treasury pool2
+  const treasuryTotal = ethers.BigNumber.from("27000000000000000000000000");
   const treasuryRemaining = await teddyToken.balanceOf(TREASURY)
-  const treasuryIssued = TREASURY_TOTAL.sub(treasuryRemaining);
+  const treasuryIssued = treasuryTotal.sub(treasuryRemaining);
 
+  
   const circulatingSupply = ethers.BigNumber.from("0")
     .add(tsdPoolRewardsIssued)
-    .add(teddyPoolRewardsIssued)
     .add(spRewardsIssued)
-    .add(treasuryIssued);
+    .add(treasuryIssued)    
+    .sub(teddyPoolRemaining);
 
   return {
     statusCode: 200,
-
     body: JSON.stringify({
       circulatingSupply: circulatingSupply.toString()
     })
