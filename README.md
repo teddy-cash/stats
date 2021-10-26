@@ -49,9 +49,3 @@ Then deploy to netlify:
 ```
 netlify deploy --dir=out/ --prod
 ```
-
-mix teddy.apr
-
-```
-
-```
