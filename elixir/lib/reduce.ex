@@ -2,12 +2,19 @@ defmodule Reducer do
   require Logger
 
   def write do
+    circ_supply = File.read!("../out/v1/circulating-supply")
+    {circ, _} = Integer.parse(circ_supply)
+
     {borrowing_7d, borrowing_total} = run()
 
     {redemption_7d, redemption_total} = redemption()
 
     str = Jason.encode!(%{
       updated_at: DateTime.utc_now(),
+      supply: %{
+        circulating: circ,
+        total: 88000000
+      },
       borrowing_fee_tsd: %{
         last_7d: borrowing_7d,
         total: borrowing_total
@@ -17,6 +24,7 @@ defmodule Reducer do
         total: redemption_total
       }
     }, pretty: true)
+
     File.write!("../out/data.json", str)
   end
 

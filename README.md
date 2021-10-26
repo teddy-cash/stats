@@ -14,8 +14,8 @@ On a VM install asdf with asdf plugin for node, yarn, elixir, erlang.
 ```
 # install netlify-cli
 yarn install
-netlify login
-netlify site (just api.teddy.cash)
+npx netlify login
+npx netlify site (just api.teddy.cash)
 
 # setup elixir
 cd elixir
@@ -47,5 +47,5 @@ mix teddy.apr
 Then deploy to netlify:
 
 ```
-netlify deploy --dir=out/ --prod
+npx netlify deploy --dir=out/ --prod
 ```

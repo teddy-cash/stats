@@ -1,4 +1,4 @@
-defmodule Mix.Tasks.Teddy.Apr do
+defmodule Mix.Tasks.Teddy.Stats do
   @moduledoc "Printed when the user requests `mix help echo`"
   @shortdoc "Echoes arguments"
   @requirements ["app.config", "app.start"]
