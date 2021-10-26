@@ -1,6 +1,11 @@
 {
-  "teddy_staking": {
-    "last_7d_yield": 9704,
-    "since_inception": 349186
-  }
+  "borrowing_fee_tsd": {
+    "last_7d": 9839.637064358416,
+    "since_inception": 349328.8365719536
+  },
+  "redemption_fee_avax": {
+    "last_7d": 14.616648283212067,
+    "since_inception": 398.6820133984177
+  },
+  "updated_at": "2021-10-26T17:55:50.349114Z"
 }
