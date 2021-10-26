@@ -38,6 +38,12 @@ let teddyPoolReward = new ethers.Contract(
 const TREASURY_TOTAL = ethers.BigNumber.from("27000000000000000000000000");
 const TREASURY = "0x7B4a14CD122BFE2e717c27914a024D05eC3061B9"
 
+const headers = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Headers': 'Content-Type',
+  'Access-Control-Allow-Methods': 'GET'
+};
+
 
 exports.handler = async function(event, context) {
   const spRewardsIssued = await communityIssuance.totalLQTYIssued();  
@@ -54,7 +60,6 @@ exports.handler = async function(event, context) {
   const treasuryTotal = ethers.BigNumber.from("27000000000000000000000000");
   const treasuryRemaining = await teddyToken.balanceOf(TREASURY)
   const treasuryIssued = treasuryTotal.sub(treasuryRemaining);
-
   
   const circulatingSupply = ethers.BigNumber.from("0")
     .add(tsdPoolRewardsIssued)
@@ -64,6 +69,7 @@ exports.handler = async function(event, context) {
 
   return {
     statusCode: 200,
+    headers,
     body: JSON.stringify({
       circulatingSupply: circulatingSupply.toString()
     })
