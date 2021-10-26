@@ -9,12 +9,12 @@ defmodule Reducer do
     str = Jason.encode!(%{
       updated_at: DateTime.utc_now(),
       borrowing_fee_tsd: %{
-        last_7d_yield: borrowing_7d,
-        since_inception: borrowing_total
+        last_7d: borrowing_7d,
+        total: borrowing_total
       },
       redemption_fee_avax: %{
-        last_7d_yield: redemption_7d,
-        since_inception: redemption_total
+        last_7d: redemption_7d,
+        total: redemption_total
       }
     }, pretty: true)
     File.write!("../out/data.json", str)

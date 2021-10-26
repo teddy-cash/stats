@@ -31,7 +31,7 @@ let teddyPoolReward = new ethers.Contract(
 const TREASURY = "0x7B4a14CD122BFE2e717c27914a024D05eC3061B9"
 
 
-exports.handler = async function(event, context) {
+const handler = async function(event, context) {
   // Stability pool.   
   const spRewardsIssued = await communityIssuance.totalLQTYIssued();  
 
@@ -57,8 +57,7 @@ exports.handler = async function(event, context) {
     .add(treasurySpent)
     .sub(teddyPoolRemaining);
 
-  return {
-    statusCode: 200,
-    body: circulatingSupply.div("1000000000000000000").toString()
-  };
+  console.log(circulatingSupply.div("1000000000000000000").toString());
 }
+
+handler()
