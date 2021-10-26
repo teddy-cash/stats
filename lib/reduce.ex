@@ -7,11 +7,11 @@ defmodule Reducer do
     {last_7d, total} = run()
     str = Jason.encode!(%{
       teddy_staking: %{
-        last_7d_yield: last_7d,
-        since_inception: total
+        last_7d_yield: trunc(last_7d),
+        since_inception: trunc(total)
       }
-    })
-    File.write!("_build/data.json", str)
+    }, pretty: true)
+    File.write!("out/data.json", str)
   end
 
   def run do
@@ -61,6 +61,6 @@ defmodule Reducer do
     IO.puts("Last 7d: #{last_7d |> trunc}")
     IO.puts("Total: #{total |> trunc}")
 
-    {last_yd, total}
+    {last_7d, total}
   end
 end
