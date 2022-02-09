@@ -1,5 +1,13 @@
 {
+  "scripts": {
+    "build:elixir": "cd elixir && mix teddy.stats",
+    "build:node": "cd node && node src/circulating-supply.js > ../out/v1/circulating-supply",
+    "deploy": "run-s build:node build:elixir && netlify deploy --dir=out/ --prod"
+  },
   "devDependencies": {
     "netlify-cli": "^6.14.4"
+  },
+  "dependencies": {
+    "npm-run-all": "^4.1.5"
   }
 }
