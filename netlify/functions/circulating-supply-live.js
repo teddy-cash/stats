@@ -44,8 +44,8 @@ const headers = {
   'Access-Control-Allow-Methods': 'GET'
 };
 
+const getCirculatingSupply = async function(event, context) {
 
-exports.handler = async function(event, context) {
   const spRewardsIssued = await communityIssuance.totalLQTYIssued();  
 
   // AVAX/TSD pool2
@@ -60,13 +60,24 @@ exports.handler = async function(event, context) {
   const treasuryTotal = ethers.BigNumber.from("27000000000000000000000000");
   const treasuryRemaining = await teddyToken.balanceOf(TREASURY)
   const treasuryIssued = treasuryTotal.sub(treasuryRemaining);
-  
+
+  const axialRewards = ethers.BigNumber.from('1250000000000000000000000')
+
   const circulatingSupply = ethers.BigNumber.from("0")
     .add(tsdPoolRewardsIssued)
     .add(spRewardsIssued)
-    .add(treasuryIssued)    
+    .add(treasuryIssued)
+    .add(axialRewards)
     .sub(teddyPoolRemaining);
 
+  return circulatingSupply;
+};
+
+
+exports.handler = async function(event, context) {
+
+  const circulatingSupply = await getCirculatingSupply();
+  
   return {
     statusCode: 200,
     headers,
@@ -75,3 +86,5 @@ exports.handler = async function(event, context) {
     })
   };
 }
+
+
