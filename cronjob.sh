@@ -1,5 +1,6 @@
-#!/bin/sh
+#!/usr/bin/bash
 
-(cd node/ && node src/circulating-supply.js > ../out/v1/circulating-supply)
-(cd elixir/ && mix teddy.stats)
-npx netlify deploy --dir=out/ --prod
+. $HOME/.asdf/asdf.sh
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+(cd $SCRIPT_DIR && $(which yarn) run deploy)
+date

@@ -49,3 +49,9 @@ Then deploy to netlify:
 ```
 npx netlify deploy --dir=out/ --prod
 ```
+
+OR do it all in one task!
+
+```
+yarn run deploy
+```

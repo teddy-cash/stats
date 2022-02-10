@@ -30,3 +30,5 @@ slurper-*.tar
 
 # Local Netlify folder
 .netlify
+
+deploys.log

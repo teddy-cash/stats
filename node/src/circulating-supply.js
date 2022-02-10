@@ -47,16 +47,15 @@ const handler = async function(event, context) {
 
   // Treasury pool2
   // treasury 27m - 1M distributed to teddy pool2
+  //              - 1.25M distributed to axial
   const treasuryTotal = ethers.BigNumber.from("27000000000000000000000000");
   const treasuryRemaining = await teddyToken.balanceOf(TREASURY)
   const treasurySpent = treasuryTotal.sub(treasuryRemaining);
-  const axialRewards = ethers.BigNumber.from('1250000000000000000000000')
 
   const circulatingSupply = ethers.BigNumber.from("0")
     .add(tsdPoolRewardsIssued)
     .add(spRewardsIssued)
     .add(treasurySpent)
-    .add(axialRewards)
     .sub(teddyPoolRemaining);
 
   console.log(circulatingSupply.div("1000000000000000000").toString());
