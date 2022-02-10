@@ -32,20 +32,20 @@ const TREASURY = "0x7B4a14CD122BFE2e717c27914a024D05eC3061B9"
 
 
 const handler = async function(event, context) {
-  // Stability pool.   
+  // Stability pool - initially was 32M
   const spRewardsIssued = await communityIssuance.totalLQTYIssued();  
 
-  // AVAX/TSD pool2
+  // AVAX/TSD pool1
   const tsdPoolRewardsTotal = ethers.BigNumber.from("3000000000000000000000000");
   const tsdPoolRemaining = await teddyToken.balanceOf(tsdPoolRewards.address)
   const tsdPoolRewardsIssued = tsdPoolRewardsTotal.sub(tsdPoolRemaining);
 
-  // AVAX/TEDDY pool2
+  // AVAX/TEDDY pool2 - rewards issued should be included in treasurySpent below
   // const teddyPoolRewardsTotal = ethers.BigNumber.from("1000000000000000000000000");
+  // teddyPoolRemaining is very, very close to zero
   const teddyPoolRemaining = await teddyToken.balanceOf(teddyPoolReward.address)
   // const teddyPoolRewardsIssued = teddyPoolRewardsTotal.sub(teddyPoolRemaining);
 
-  // Treasury pool2
   // treasury 27m - 1M distributed to teddy pool2
   //              - 1.25M distributed to axial
   const treasuryTotal = ethers.BigNumber.from("27000000000000000000000000");
